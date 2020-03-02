@@ -9,7 +9,7 @@ class Blog(models.Model):
     date_created = models.DateTimeField('Date Created',auto_now_add=True)
     last_modified = models.DateTimeField('Last Modified',auto_now=True)
     slug = models.SlugField(max_length=200)
-    author = models.OneToOneField(User, on_delete= models.CASCADE, related_name = 'blog_posts')
+    author = models.ForeignKey(User, on_delete= models.CASCADE)
 
     class Meta():
         ordering: ['-date_created']
