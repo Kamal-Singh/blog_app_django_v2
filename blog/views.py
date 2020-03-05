@@ -61,3 +61,33 @@ def create_blog(request):
     form = CreateBlogForm()
     context = {'form': form}
     return render(request,'blog/create_blog.html',context)
+
+@login_required
+def edit_blog(request,blog_id):
+    if request.method == 'POST':
+        form = CreateBlogForm(request.POST)
+        blog = Blog.objects.get(id=blog_id)
+        if form.is_valid():
+            form.date_created = blog.date_created
+            form.author =  blog.author
+            form.save(commit=True)
+            return HttpResponse("Form Edited Successfully!!")
+        else:
+            return HttpResponse("Edit is Invalid!!")
+    blog = Blog.objects.get(id = blog_id)
+    if blog:
+        form = CreateBlogForm(blog)
+        context = {'form': form}
+        return render(request,'blog/edit_blog.html',context)
+    else:
+        return HttpResponse("No such blog exists!!")
+
+def view_blog(request,blog_id):
+    blog = Blog.objects.get(id=blog_id)
+    context = {'blog':blog}
+    return render(request,'blog/view_blog.html',context)
+
+def index(request):
+    blogs = Blog.objects.all()
+    context = {'blogs':blogs}
+    return render(request,'blog/index.html',context)

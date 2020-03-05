@@ -1,0 +1,7 @@
+{% load crispy_forms_tags %}
+<h2>Edit Blog</h2>
+<form method="POST">
+    {{ form|crispy }}
+    {% csrf_token %}
+    <input type='submit' value='Create' />
+</form>
