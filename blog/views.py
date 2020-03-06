@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def user_signup(request):
+    if request.user.is_authenticated:
+        return HttpResponse("You are already signed in!!")
     if request.method == 'POST':
         form = UserSignupForm(request.POST)
         if form.is_valid():
@@ -22,6 +24,8 @@ def user_signup(request):
     return render(request,'user/signup.html',context)
 
 def user_signin(request):
+    if request.user.is_authenticated:
+        return HttpResponse("You are already logged in!!")
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -34,8 +38,6 @@ def user_signin(request):
             return HttpResponse("User Signed In Successfully!!")
         else:
             return HttpResponse("Invalid Credentials!!")
-    elif request.user.is_authenticated:
-        return HttpResponse("You are already logged in!!")
     context = {}
     return render(request,'user/signin.html',context)
 
@@ -65,29 +67,44 @@ def create_blog(request):
 @login_required
 def edit_blog(request,blog_id):
     if request.method == 'POST':
-        form = CreateBlogForm(request.POST)
         blog = Blog.objects.get(id=blog_id)
+        form = CreateBlogForm(request.POST,instance=blog)
         if form.is_valid():
-            form.date_created = blog.date_created
-            form.author =  blog.author
+            post = form.save(commit=False)
+            post.author =  request.user
             form.save(commit=True)
             return HttpResponse("Form Edited Successfully!!")
         else:
             return HttpResponse("Edit is Invalid!!")
     blog = Blog.objects.get(id = blog_id)
     if blog:
-        form = CreateBlogForm(blog)
+        if request.user != blog.author:
+            return HttpResponse("You are not authorized to do this action!!")
+        form = CreateBlogForm(instance = blog)
         context = {'form': form}
         return render(request,'blog/edit_blog.html',context)
     else:
         return HttpResponse("No such blog exists!!")
 
 def view_blog(request,blog_id):
-    blog = Blog.objects.get(id=blog_id)
+    blog = Blog.objects.filter(id=blog_id).first()
+    print(blog)
     context = {'blog':blog}
     return render(request,'blog/view_blog.html',context)
 
 def index(request):
     blogs = Blog.objects.all()
-    context = {'blogs':blogs}
+    print(blogs)
+    context = {'blogs': blogs}
     return render(request,'blog/index.html',context)
+
+@login_required
+def delete_blog(request,blog_id):
+    blog = Blog.objects.get(id=blog_id)
+    if blog:
+        if request.user != blog.author:
+            return HttpResponse("You are not authorized to do this action!!")
+        blog.delete()
+        return HttpResponse("Blog Deleted Successfully!!")
+    else:
+        return HttpResponse("No such Blog Exist!!")

@@ -1,0 +1,5 @@
+<ul>
+    {% for i in blogs %}
+    <li><a href = 'blog/{{ i.id }}/'>{{ i.title }}</a></li>
+    {% endfor %}
+</ul>
