@@ -1,12 +1,12 @@
 {% extends "../base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-container">
+    <div class="col-6 content-container">
         <h2>Edit Blog</h2>
         <form method="POST">
             {{ form|crispy }}
             {% csrf_token %}
-            <input type='submit' value='Save' />
+            <button class="bton btn-success" type='submit' value='Save' >Save</button>
         </form>
     </div>
 {% endblock content %}

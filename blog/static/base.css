@@ -39,9 +39,11 @@ body{
 }
 
 .content-container {
+    position: relative;
     margin: auto;
-    width: 70%;
+    width: 60%;
     box-sizing: border-box;
+    margin-left: 20%;
 }
 
 /* #Navigation
