@@ -1,5 +1,43 @@
-<ul>
-    {% for i in blogs %}
-    <li><a href = 'blog/{{ i.id }}/'>{{ i.title }}</a></li>
-    {% endfor %}
-</ul>
+{% extends "../base.html" %}
+{% block content %}
+{% if blogs is none %}
+<div class="my-5 py-5">
+    <div class="section full-height">
+        <div class="absolute-center">
+            <div class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1><span>B</span><span>o</span><span>o</span><span>t</span><span>s</span><span>t</span><span>r</span><span>a</span><span>p</span> <span>4</span><br>
+                                <span>m</span><span>e</span><span>n</span><span>u</span></h1>
+                                <p></p>
+                            </div>	
+                        </div>		
+                    </div>		
+                </div>
+            </div>
+    </div>
+</div>
+{% else %}
+<div class="absolute-center">
+<div class="blog-slider">
+    <div class="blog-slider__wrp swiper-wrapper">
+    {% for blog in blogs %}
+      <div class="blog-slider__item swiper-slide">
+        <div class="blog-slider__img">
+          <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1535759872/kuldar-kalvik-799168-unsplash.jpg" alt="">
+        </div>
+        <div class="blog-slider__content">
+          <span class="blog-slider__code">{{ blog.date_created }}</span>
+          <div class="blog-slider__title">{{ blog.title }}</div>
+          <div class="blog-slider__text">{{ blog.content }}</div>
+          <a href="/blog/{{ blog.id }}" class="blog-slider__button">READ MORE</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="blog-slider__pagination"></div>
+  </div>
+  </div>
+{% endif %}
+{% endblock content %}

@@ -94,8 +94,10 @@ def view_blog(request,blog_id):
 
 def index(request):
     blogs = Blog.objects.all()
-    print(blogs)
-    context = {'blogs': blogs}
+    if blogs.count() != 0:
+        context = {'blogs': blogs}
+    else:
+        context = {}
     return render(request,'blog/index.html',context)
 
 @login_required
