@@ -30,7 +30,7 @@
         <div class="blog-slider__content">
           <span class="blog-slider__code">{{ blog.date_created }}</span>
           <div class="blog-slider__title">{{ blog.title }}</div>
-          <div class="blog-slider__text">{{ blog.content }}</div>
+          <div class="blog-slider__text">{{ blog.content|truncatechars:100 }}</div>
           <a href="/blog/{{ blog.id }}" class="blog-slider__button">READ MORE</a>
         </div>
       </div>

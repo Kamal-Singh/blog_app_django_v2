@@ -336,7 +336,7 @@ h1 span:nth-child(15){
 #switch {
     right: 0;
     bottom: 0;
-	width: 60px;
+	width: 30px;
 	height: 8px;
 	border: 2px solid #8167a9;
 	border-radius: 27px;
@@ -369,7 +369,7 @@ body.hero-anime #switch{
 	background: #8167a9 !important;
 }
 .switched #circle {
-	left: 43px;
+	left: 15px;
 	box-shadow: 0 4px 4px rgba(26,53,71,0.25), 0 0 0 1px rgba(26,53,71,0.07);
 	background: #fff;
 }

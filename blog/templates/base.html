@@ -45,6 +45,23 @@
 			</div>
 		</div>
 	</div>
+	{% if messages %}
+		<ul class="messages" style="
+		display: block;
+		margin: 7% 0%;
+		list-style: none;
+		position: absolute;
+		width: 90%;
+	">
+    {% for msg in messages %}       
+    	<li>
+        	<div class="alert alert-success" role="alert">
+        	{{msg|title}}
+        	</div>
+    	</li>
+    {% endfor %}
+		</ul>
+{% endif %}
 	{% block content %}
 	{% endblock content %}
 	<div class="theme-button">
