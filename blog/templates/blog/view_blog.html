@@ -1,10 +1,34 @@
-<h1>{{ blog.title }}</h1>
-<p>{{ blog.slug }}</p>
-<p>{{ blog.image }}</p>
-<p>{{ blog.description }}</p>
-<p>{{ blog.date_created }}</p>
-<p>{{ blog.last_modified }}</p>
-{% if user.is_authenticated and user == blog.author %}
-    <a href="/editblog/{{ blog.id }}/" >Edit</a>
-    <a href="/delete/{{ blog.id }}/" >Delete</a>
-{% endif %}
+{% extends "../base.html" %}
+{% block content %}
+<div class="absolute-center" style="height: 80%;">
+    <div class="view-blog-container" style="width: 95%;
+    position: relative;
+    max-width: 55%;
+    margin: auto;
+    background: #fff;
+    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+    padding: 25px;
+    border-radius: 25px;
+    height: 95%;
+    transition: all 0.3s;
+    overflow: hidden;
+">
+    <h1>{{ blog.title|title }}</h1>
+    <img src="{{ blog.image }}" alt="No Image" onerror="this.src='https://images.pexels.com/photos/949587/pexels-photo-949587.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'" style="
+    vertical-align: middle;
+    width: 100%;
+    height: 50%;
+    object-fit: scale-down; "
+    />
+    <h6 style="padding-top:1em;">-{{ blog.author }}, {{ blog.date_created }}</h6>
+    <p style="padding-top:1.5em; text-align: left; transition: none;">{{ blog.content|capfirst }}</p>
+    <h6 style="padding-top:1em; text-align: left;">*Last Modified - {{ blog.last_modified }}</h6>
+    {% if user.is_authenticated and user == blog.author %}
+    <div style="padding-top: 1em;">
+        <a href="/editblog/{{ blog.id }}/" class="blog-slider__button" style="text-decoration: none;">EDIT</a>
+        <a href="/delete/{{ blog.id }}/" class="blog-slider__button" style="text-decoration: none;">DELETE</a>
+    </div>
+    {% endif %}
+</div>
+</div>
+{% endblock content %}

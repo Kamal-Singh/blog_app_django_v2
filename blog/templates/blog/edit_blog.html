@@ -2,11 +2,11 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="col-6 content-container">
-        <h2>Edit Blog</h2>
+        <h1 style="text-align: center;">Edit Blog</h1>
         <form method="POST">
             {{ form|crispy }}
             {% csrf_token %}
-            <button class="bton btn-success" type='submit' value='Save' >Save</button>
+            <button class="btn btn-success" type='submit' value='Save' >Save</button>
         </form>
     </div>
 {% endblock content %}
