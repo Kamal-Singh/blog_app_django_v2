@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.messages import get_messages
+# from django.utils import timezone
 
 # Create your views here.
 def generate_error_context(error_code='404',message1='The page',message2='was not found'):
@@ -81,17 +82,17 @@ def create_blog(request):
 @login_required
 def edit_blog(request,blog_id):
     if request.method == 'POST':
+        blog = Blog.objects.get(id=blog_id)
         if request.user != blog.author:
             context = generate_error_context('403','you are not','authorized to do this action')
             return render(request,'error.html',context)
-        blog = Blog.objects.get(id=blog_id)
         form = CreateBlogForm(request.POST,instance=blog)
         if form.is_valid():
             post = form.save(commit=False)
             post.author =  request.user
             form.save(commit=True)
             messages.success(request,'Form Edited Successfully')
-            return HttpResponseRedirect('/editblog/blog_id/')
+            return HttpResponseRedirect(reverse('blog:view_blog',kwargs={'blog_id': blog_id}))
         else:
             messages.success(request,'Edit is Invalid!!')
             context = {'form': form}
@@ -111,6 +112,7 @@ def edit_blog(request,blog_id):
 def view_blog(request,blog_id):
     blog = Blog.objects.filter(id=blog_id).first()
     if blog:
+        # blog.date_created = blog.date_created.replace(tzinfo=timezone('IN'))
         context = {'blog':blog}
         return render(request,'blog/view_blog.html',context)
     context = generate_error_context('500','no such','blog exists')
@@ -133,7 +135,8 @@ def delete_blog(request,blog_id):
             context = generate_error_context('403','you are not','authorized to do this action')
             return render(request,'error.html',context)
         blog.delete()
-        return HttpResponse("Blog Deleted Successfully!!")
+        messages.success(request,'Form Deleted Successfully')
+        return HttpResponseRedirect(reverse('blog:index'))
     else:
         context = generate_error_context('500','no such','blog exists')
         return render(request,'error.html',context)

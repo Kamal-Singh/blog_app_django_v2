@@ -32,10 +32,8 @@ body{
 }
 .theme-button {
     box-sizing: border-box;
-    position: relative;
-    bottom: 3em;
-    right: 3em;
-    width: 100%;
+	right: -7em;
+	top: -1em;
 }
 
 .content-container {
@@ -176,7 +174,7 @@ body{
     transition: all 200ms linear;
 }
 .section {
-    position: relative;
+    /* position: relative; */
 	width: 100%;
 	display: block;
 }
@@ -326,6 +324,90 @@ h1 span:nth-child(14){
 }
 h1 span:nth-child(15){
     transition-delay: 1450ms;
+}
+body.hero-anime h1 span:nth-child(16){
+	opacity: 0;
+	transform: translateY(50px);
+}
+h1 span:nth-child(16){
+    transition-delay: 1600ms;
+}
+body.hero-anime h1 span:nth-child(18){
+	opacity: 0;
+	transform: translateY(50px);
+}
+h1 span:nth-child(18){
+    transition-delay: 1600ms;
+}
+body.hero-anime h1 span:nth-child(19){
+	opacity: 0;
+	transform: translateY(-50px);
+}
+h1 span:nth-child(19){
+    transition-delay: 1600ms;
+}
+body.hero-anime h1 span:nth-child(21){
+	opacity: 0;
+	transform: translateY(50px);
+}
+h1 span:nth-child(21){
+    transition-delay: 1700ms;
+}
+body.hero-anime h1 span:nth-child(22){
+	opacity: 0;
+	transform: translateY(-50px);
+}
+h1 span:nth-child(22){
+    transition-delay: 1700ms;
+}
+body.hero-anime h1 span:nth-child(23){
+	opacity: 0;
+	transform: translateY(50px);
+}
+h1 span:nth-child(23){
+    transition-delay: 1700ms;
+}
+body.hero-anime h1 span:nth-child(24){
+	opacity: 0;
+	transform: translateY(-50px);
+}
+h1 span:nth-child(24){
+    transition-delay: 1700ms;
+}
+body.hero-anime h1 span:nth-child(26){
+	opacity: 0;
+	transform: translateY(-50px);
+}
+h1 span:nth-child(26){
+    transition-delay: 1800ms;
+}
+body.hero-anime h1 span:nth-child(27){
+	opacity: 0;
+	transform: translateY(50px);
+}
+h1 span:nth-child(27){
+    transition-delay: 1800ms;
+}
+body.hero-anime h1 span:nth-child(28){
+	opacity: 0;
+	transform: translateY(-50px);
+}
+h1 span:nth-child(28){
+    transition-delay: 1800ms;
+}
+body.hero-anime h1 span:nth-child(29){
+	opacity: 0;
+	transform: translateY(50px);
+}
+h1 span:nth-child(29){
+    transition-delay: 1800ms;
+}
+body.hero-anime h1 span:nth-child(30){
+	opacity: 0;
+	transform: translateY(-50px);
+}
+h1 span:nth-child(30){
+    transition-delay: 1800ms;
 }
 #switch,
 #circle {
